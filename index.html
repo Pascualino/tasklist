@@ -19,11 +19,11 @@
 <ion-side-menu-content>
   <ion-header-bar class="bar-dark">
       <!-- New Task button-->
-      <button class="button button-icon" ng-click="newTask()">
+      <button class="button button-icon" ng-controller="NewTaskModalCtrl" ng-click="createTaskModalFunctions.openModal()">
         <i class="icon ion-compose"></i>
       </button>
 
-    <h1 class="title">{{activeProject.title}}</h1>
+    <h1 class="title">{{getActiveProject().title}}</h1>
     <button class="button button-icon" ng-click="toggleProjects()">
       <i class="icon ion-navicon"></i>
     </button>
@@ -33,15 +33,15 @@
     <ion-refresher pulling-text="Pull to refresh" on-refresh="refreshTaskList()"></ion-refresher>
     <!-- our list and list items -->
     <ion-list>
-      <ion-checkbox ng-repeat="task in activeProject.tasks" ng-model="task.active" ng-change="updateServerData()" on-swipe-right="completeTask(task)">
-        {{task.title}}
-      </ion-item>
+      <ion-checkbox ng-repeat="task in getActiveProject().tasks" ng-model="task.active" ng-change="onChangeTaskActive()" on-swipe-right="onSwipeRightTaskItem(task)">
+        <i class="icon ion-star" ng-repeat="n in range(task.importance)"></i> [{{task.time}}] {{task.title}}
+      </ion-checkbox>
     </ion-list>
   </ion-content>
 </ion-side-menu-content>
 
   <!-- Right menu -->
-  <ion-side-menu side="right">
+  <ion-side-menu side="right" ng-controller="SelectProjectCtrl">
     <ion-header-bar class="bar-dark">
       <h1 class="title">Projects</h1>
       <button class="button button-icon ion-plus" ng-click="newProject()">
@@ -49,7 +49,7 @@
     </ion-header-bar>
     <ion-content scroll="false">
       <ion-list>
-        <ion-item ng-repeat="project in projects" ng-click="selectProject(project, $index)" ng-class="{active: activeProject == project}">
+        <ion-item ng-repeat="project in getProjects()" ng-click="selectProject(project)" ng-class="{active: getActiveProject() == project}" on-swipe-right="onSwipeRightProjectItem(project)">
           {{project.title}}
         </ion-item>
       </ion-list>
@@ -58,6 +58,7 @@
 
     </ion-side-menus>
 
+
 <script id="new-task.html" type="text/ng-template">
 
   <div class="modal">
@@ -65,16 +66,36 @@
     <!-- Modal header bar -->
     <ion-header-bar class="bar-secondary">
       <h1 class="title">New Task</h1>
+<<<<<<< 94ababb60d682a5c4d03df46823df53e6502f364
       <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>
+=======
+      <button class="button button-clear button-positive" ng-click="createTaskModalFunctions.hideModal()">Cancel</button>
+>>>>>>> Initial (WIP)
     </ion-header-bar>
 
     <!-- Modal content area -->
     <ion-content>
 
+<<<<<<< 94ababb60d682a5c4d03df46823df53e6502f364
       <form ng-submit="createTask(task)">
         <div class="list">
           <label class="item item-input">
             <input type="text" placeholder="What do you need to do?" ng-model="task.title">
+=======
+      <form ng-submit="createTaskModalFunctions.submit()">
+        <div class="list">
+          <div class="item item-divider">Title:</div>
+          <label class="item item-input">
+              <input type="text" placeholder="What do you need to do?" ng-model="newTask.title">
+          </label>
+          <div class="item item-divider">Importance:</div>
+          <label class="item item-input">
+            <ion-radio ng-repeat="val in [1,2,3,4,5]" ng-model="newTask.importance" ng-value="{{val}}" name="importance"> {{val}} </ion-radio>
+          </label>
+          <div class="item item-divider">Estimated Time Slots:</div>
+          <label class="item item-input">
+            <ion-radio ng-repeat="val in [1,2,3,4,5,6,7,8,9,10]" ng-model="newTask.time" ng-value="{{val}}" name="time"> {{val}} </ion-radio>
+>>>>>>> Initial (WIP)
           </label>
         </div>
         <div class="padding">
