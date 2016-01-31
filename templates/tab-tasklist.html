@@ -10,9 +10,24 @@
         <ion-refresher pulling-text="Pull to refresh" on-refresh="refreshTaskList()"></ion-refresher>
         <!-- our list and list items -->
         <ion-list>
-            <ion-checkbox ng-repeat="task in getTasks()" ng-model="task.active" ng-change="onChangeTaskActive()" on-swipe-right="onSwipeRightTaskItem(task)">
-                <i class="icon ion-star" ng-repeat="n in range(task.importance)"></i> [{{task.time}}] {{task.title}}
-            </ion-checkbox>
+            <!-- Tasks for Today -->
+            <ion-item class="list-section-header">
+                Today
+            </ion-item>
+            <ion-item ng-repeat="task in getPrioritizedTasks().today track by $index" href="#/edittask/{{$index}}"
+                      on-swipe-right="onSwipeRightTaskItem(task)" on-swipe-left="onSwipeLeftTaskItem(task)">
+                <p ng-class="{strike: task.completed}"><i class="icon ion-star" ng-repeat="n in range(task.importance)"></i> [{{task.time}}] {{task.title}}</p>
+            </ion-item>
+
+            <!-- Upcoming tasks -->
+            <ion-item class="list-section-header">
+                Upcoming
+            </ion-item>
+            <ion-item ng-repeat="task in getPrioritizedTasks().upcoming track by $index" href="#/edittask/{{$index + getPrioritizedTasks().today.length}}"
+                      on-swipe-right="onSwipeRightTaskItem(task)" on-swipe-left="onSwipeLeftTaskItem(task)">
+                <p ng-class="{strike: task.completed}"><i class="icon ion-star" ng-repeat="n in range(task.importance)"></i> [{{task.time}}] {{task.title}}</p>
+            </ion-item>
+
         </ion-list>
     </ion-content>
 </ion-view>

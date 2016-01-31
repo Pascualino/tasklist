@@ -1,0 +1,29 @@
+<ion-view view-title="Edit Task">
+    <ion-content>
+
+        <form ng-submit="submit()">
+            <div class="list">
+                <div class="item item-divider">Title:</div>
+                <label class="item item-input">
+                    <input type="text" placeholder="What do you need to do?" ng-model="task.title"/>
+                </label>
+                <div class="item item-divider">Importance:</div>
+                <label class="item item-input">
+                    <ion-radio ng-repeat="val in [1,2,3,4,5]" ng-model="task.importance" ng-value="{{val}}" name="importance"> {{val}} </ion-radio>
+                </label>
+                <div class="item item-divider">Estimated Time Slots:</div>
+                <label class="item item-input">
+                    <ion-radio ng-repeat="val in [1,2,3,4,5,6,7,8,9,10]" ng-model="task.time" ng-value="{{val}}" name="time"> {{val}} </ion-radio>
+                </label>
+                <div class="item item-divider">Description:</div>
+                <label class="item item-input">
+                    <textarea type="text" placeholder="What do you need to do?" ng-model="task.description"></textarea>
+                </label>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">Edit Task</button>
+            </div>
+        </form>
+
+    </ion-content>
+</ion-view>

@@ -1,1 +1,6 @@
-/* Empty. Add your own CSS if you like */
+.strike {
+    text-decoration: line-through;
+}
+.list-section-header {
+    font-weight: bold;
+}
