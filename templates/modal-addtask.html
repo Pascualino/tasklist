@@ -1,0 +1,35 @@
+
+<div class="modal">
+
+    <!-- Modal header bar -->
+    <ion-header-bar class="bar-secondary">
+        <h1 class="title">New Task</h1>
+        <button class="button button-clear button-positive" ng-click="createTaskModalFunctions.hideModal()">Cancel</button>
+    </ion-header-bar>
+
+    <!-- Modal content area -->
+    <ion-content>
+
+        <form ng-submit="createTaskModalFunctions.submit()">
+            <div class="list">
+                <div class="item item-divider">Title:</div>
+                <label class="item item-input">
+                    <input type="text" placeholder="What do you need to do?" ng-model="newTask.title">
+                </label>
+                <div class="item item-divider">Importance:</div>
+                <label class="item item-input">
+                    <ion-radio ng-repeat="val in [1,2,3,4,5]" ng-model="newTask.importance" ng-value="{{val}}" name="importance"> {{val}} </ion-radio>
+                </label>
+                <div class="item item-divider">Estimated Time Slots:</div>
+                <label class="item item-input">
+                    <ion-radio ng-repeat="val in [1,2,3,4,5,6,7,8,9,10]" ng-model="newTask.time" ng-value="{{val}}" name="time"> {{val}} </ion-radio>
+                </label>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">Create Task</button>
+            </div>
+        </form>
+
+    </ion-content>
+
+</div>

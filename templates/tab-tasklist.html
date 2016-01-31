@@ -1,0 +1,18 @@
+<ion-view view-title="TaskList">
+    <ion-nav-buttons side="primary">
+        <!-- New Task button-->
+        <button class="button button-icon" ng-controller="NewTaskModalCtrl" ng-click="createTaskModalFunctions.openModal()">
+            <i class="icon ion-compose"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh" on-refresh="refreshTaskList()"></ion-refresher>
+        <!-- our list and list items -->
+        <ion-list>
+            <ion-checkbox ng-repeat="task in getTasks()" ng-model="task.active" ng-change="onChangeTaskActive()" on-swipe-right="onSwipeRightTaskItem(task)">
+                <i class="icon ion-star" ng-repeat="n in range(task.importance)"></i> [{{task.time}}] {{task.title}}
+            </ion-checkbox>
+        </ion-list>
+    </ion-content>
+</ion-view>
